@@ -29,8 +29,9 @@ def translateToMorse():
         if character == ' ':
             raise IOError("entry is empty")
         else:
-            result.append(matching.values([character.upper()]))
+            result.append(matching[character.upper()])
             #not working
+    print(result)
     return result
 
 def translateFromMorse():
