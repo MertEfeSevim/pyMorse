@@ -18,3 +18,35 @@ matching = {'A': '.-',  'B': '-...', 'C': '-.-.',
             "/" : "-..-.",  "@" : ".--.-.",
             "=" : "-...-"
             }
+
+def translateToMorse():
+
+    entry = input('Entry: ')
+
+    result = []
+
+    for character in entry:
+        if character == ' ':
+            raise IOError("entry is empty")
+        else:
+            result.append(matching.values([character.upper()]))
+            #not working
+    return result
+
+def translateFromMorse():
+
+    entry = input('Entry: ')
+
+    result = ""
+
+    for character in entry:
+        if character == ' ':
+            raise IOError("entry is empty")
+        else:
+            result += matching.values([character.upper()])
+
+    print(result)
+
+if __name__ == '__main__':
+    translateToMorse()
+    #translateFromMorse()
