@@ -19,14 +19,54 @@ matching = {'A': '.-',  'B': '-...', 'C': '-.-.',
             "=" : "-...-"
             }
 
-def translateToMorse():
+def writeMorse(lst):
+    with open("MorseTranslated.txt", "w") as F:
+        temp = ""
+        for i in lst:
+            temp += (i+" ")
+        F.write(temp)
+        F.close()
+        print("string was translated and written to the 'MorseTranslated.txt'. ")
+    return 0
 
-    entry = input('Entry: ')
+def writeNormal(lst):
+    with open("NormalTranslated.txt", "w") as F:
+        temp=""
+        for i in lst:
+            temp+=i
+        F.write(temp)
+        F.close()
+        print("string was translated and written to the 'NormalTranslated.txt'. ")
+    return 0
+
+def readMorse():
+    output=[]
+    with open("MorseTranslated.txt", "r") as F:
+        temp=F.read().split("/")
+        for i in temp:
+            output.extend(i.split())
+        print(F.read())
+        F.close()
+    return output
+
+def readNormal():
+    with open("NormalTranslated.txt", "r") as F:
+        output=F.read().split()
+        print(F.read())
+        F.close()
+    return output
+
+
+def translateToMorse(*entry):
+    if (entry==None):                   #if input parameter is Null take new input
+        entry = str(input('Entry: '))
+    else:                               #else use input parameter
+        entry = entry[0]
 
     result = []
 
     for character in entry:
-        if character == ' ':
+        if character == "":
             raise IOError("entry is empty")
         else:
             result.append(matching[character.upper()])
@@ -34,20 +74,24 @@ def translateToMorse():
     print(result)
     return result
 
-def translateFromMorse():
-
-    entry = input('Entry: ')
+def translateFromMorse(*entry):
+    if (entry==None):                   #if input parameter is Null take new input
+        entry = str(input('Entry: '))
+    else:                               #else use input parameter
+        entry = entry[0]
 
     result = ""
 
     for character in entry:
-        if character == ' ':
+        if character == '':
             raise IOError("entry is empty")
         else:
-            result += matching.values([character.upper()])
+            result += matching.values([character])
 
     print(result)
+    return result
+
 
 if __name__ == '__main__':
-    translateToMorse()
+    translateToMorse("asd")
     #translateFromMorse()
