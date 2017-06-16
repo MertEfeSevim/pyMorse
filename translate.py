@@ -39,16 +39,13 @@ matching = {
 }
 
 def translateToMorse(*entry,fileName=None):
-    if entry is None:
-        entry=int(input("Entry: "))
-    else:
-        entry=entry[0]
 
     if fileName is not None:
         entry = open(fileName,'r').read()
         print("filename",entry)
     else:
         print("normal",entry)
+        pass
 
     result = ""
 
@@ -74,7 +71,7 @@ def translateFromMorse(entry): #not working
     print(result)
 
 if __name__ == '__main__':
-    translateToMorse("mert")                #working fine now
+    translateToMorse("mert")                #not working
     #translateToMorse(fileName="sample.txt") #works
 
 
