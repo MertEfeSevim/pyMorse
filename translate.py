@@ -38,32 +38,31 @@ matching = {
         ' ': ' ',               '_': '..--.-',
 }
 
+def translateToMorse(*entry,fileName=None):
 
-
-def translateToMorse(entry,fileName=None):
-
-    if fileName is None:
-        pass
+    if fileName is not None:
+        entry = open(fileName,'r').read()
+        print("filename",entry)
     else:
-        entry=fileName[]
+        print("normal",entry)
+        pass
 
     result = ""
 
     for character in entry:
-        if character == ' ':
+        if character is None:
             raise IOError("Entry is empty")
         else:
-            result += matching[character.upper()]
-    print(result)
+            result += matching[character]
+
+    print("result",result)
     return result
-
-
 
 def translateFromMorse(entry): #not working
 
     result = ""
 
-    for character in entry.upper():
+    for character in entry:
         if character == ' ':
             raise IOError("entry is empty")
         else:
@@ -71,10 +70,26 @@ def translateFromMorse(entry): #not working
 
     print(result)
 
-
 if __name__ == '__main__':
-    translateToMorse("m",fileName="sample.txt")
+    translateToMorse("mert")                #not working
+    #translateToMorse(fileName="sample.txt") #works
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #translateFromMorse("...---...") #not working
+
+
 
 
     #entry="S"
