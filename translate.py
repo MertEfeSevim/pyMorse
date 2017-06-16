@@ -1,6 +1,17 @@
 import sys
+import re
 
-matching = {
+
+
+def translateToMorse(entry=None,fileName=None,fromMorse=False):
+    """
+    Takes one of the parameters and converts to Morse code,
+    either gets from file or as a entry. But, not at the same time.
+    :param entry: 
+    :param fileName: 
+    :return: 
+    """
+    matching = {
         'A': '.-',              'a': '.-',
         'B': '-...',            'b': '-...',
         'C': '-.-.',            'c': '-.-.',
@@ -40,23 +51,18 @@ matching = {
         ' ': ' ',               '_': '..--.-',
 }
 
-def translateToMorse(entry=None,fileName=None):
-    """
-    Will be used hopefully in GUI version
-     
-    if entry is None:
-        entry=int(get_input("Entry: "))
-    else:
-        entry=entry[0]
-    """
-
+    # Checks if one of the parameters have entered
     assert not (entry != None and fileName != None), "only one param please"
+
 
     if fileName is not None:
         entry = open(fileName,'r').read()
-        print("filename",entry)
-    else:
-        pass
+
+
+    if fromMorse is True:
+        entry=entry.split(" ")
+        reversedMatching = {v: k for k, v in matching.items()}
+        matching=reversedMatching
 
     result = ""
 
@@ -66,20 +72,10 @@ def translateToMorse(entry=None,fileName=None):
         else:
             result += matching[character]
 
-    print("result",result)
+    print(result)
     return result
 
-def translateFromMorse(entry): #not working
 
-    result = ""
-
-    for character in entry:
-        if character == ' ':
-            raise IOError("entry is empty")
-        else:
-            result += matching.get(entry)
-
-    print(result)
 
 if __name__ == '__main__':
     get_input = input
@@ -87,9 +83,22 @@ if __name__ == '__main__':
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
 
+    translateToMorse(entry="...---...",fromMorse=True)
+
+
+
     #translateToMorse(entry="mert")             #works
     #translateToMorse(fileName="sample.txt")    #works
 
     #translateFromMorse("...---...") #not working
     #entry="S"
     #print(matching.get(entry))
+
+    """
+       Will be used hopefully in GUI version
+
+       if entry is None:
+           entry=int(get_input("Entry: "))
+       else:
+           entry=entry[0]
+    """
