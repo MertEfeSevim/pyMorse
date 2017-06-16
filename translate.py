@@ -1,3 +1,5 @@
+import sys
+
 matching = {
         'A': '.-',              'a': '.-',
         'B': '-...',            'b': '-...',
@@ -38,13 +40,22 @@ matching = {
         ' ': ' ',               '_': '..--.-',
 }
 
-def translateToMorse(*entry,fileName=None):
+def translateToMorse(entry=None,fileName=None):
+    """
+    Will be used hopefully in GUI version
+     
+    if entry is None:
+        entry=int(get_input("Entry: "))
+    else:
+        entry=entry[0]
+    """
+
+    assert not (entry != None and fileName != None), "only one param please"
 
     if fileName is not None:
         entry = open(fileName,'r').read()
         print("filename",entry)
     else:
-        print("normal",entry)
         pass
 
     result = ""
@@ -71,26 +82,14 @@ def translateFromMorse(entry): #not working
     print(result)
 
 if __name__ == '__main__':
-    translateToMorse("mert")                #not working
-    #translateToMorse(fileName="sample.txt") #works
+    get_input = input
 
+    if sys.version_info[:2] <= (2, 7):
+        get_input = raw_input
 
-
-
-
-
-
-
-
-
-
-
-
+    #translateToMorse(entry="mert")             #works
+    #translateToMorse(fileName="sample.txt")    #works
 
     #translateFromMorse("...---...") #not working
-
-
-
-
     #entry="S"
     #print(matching.get(entry))
