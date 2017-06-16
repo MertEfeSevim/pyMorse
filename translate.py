@@ -1,14 +1,12 @@
 import sys
-import re
-
-
 
 def translateToMorse(entry=None,fileName=None,fromMorse=False):
     """
-    Takes one of the parameters and converts to Morse code,
+    Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
     either gets from file or as a entry. But, not at the same time.
     :param entry: 
-    :param fileName: 
+    :param fileName:
+    :param fromMorse:
     :return: 
     """
     matching = {
@@ -54,11 +52,11 @@ def translateToMorse(entry=None,fileName=None,fromMorse=False):
     # Checks if one of the parameters have entered
     assert not (entry != None and fileName != None), "only one param please"
 
-
+    #If fileName parameter is entered, it is going to read as an entry
     if fileName is not None:
         entry = open(fileName,'r').read()
 
-
+    #If translation will be going to occur from Morse code to alphabet
     if fromMorse is True:
         entry=entry.split(" ")
         reversedMatching = {v: k for k, v in matching.items()}
@@ -67,12 +65,12 @@ def translateToMorse(entry=None,fileName=None,fromMorse=False):
     result = ""
 
     for character in entry:
-        if character is None:
-            raise IOError("Entry is empty")
-        else:
+        if character is not None:
             result += matching[character]
+        else:
+            pass
 
-    print(result)
+    #print(result)
     return result
 
 
@@ -83,16 +81,14 @@ if __name__ == '__main__':
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
 
-    translateToMorse(entry="...---...",fromMorse=True)
+    #There will be another parameter which is going to write result to a file.
 
+    #################TESTING##################
 
-
-    #translateToMorse(entry="mert")             #works
-    #translateToMorse(fileName="sample.txt")    #works
-
-    #translateFromMorse("...---...") #not working
-    #entry="S"
-    #print(matching.get(entry))
+    #translateToMorse(fileName="sample.txt",fromMorse=True) #works sample.txt contains "... -- ..."
+    #translateToMorse(entry="mert")                         #works
+    #translateToMorse(fileName="sample.txt")                #works sample.txt contains "sos"
+    #translateToMorse("... --- ...",fromMorse=True)         #works
 
     """
        Will be used hopefully in GUI version
