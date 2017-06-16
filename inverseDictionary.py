@@ -1,5 +1,6 @@
 def inverseDictionary(string):
     output="{"
+    temp0=string.split()
     for i in range(1,(len(string)-1)):
         temp=string[i].split(":")
         output+=(temp[1]+":"+temp[0])
