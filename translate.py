@@ -62,18 +62,28 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
         reversedMatching = {v: k for k, v in matching.items()}
         matching=reversedMatching
 
+    #changes the characters and adds to result
     result = ""
 
+    """
+    In control1.txt "... --- ... " contained and entry gets last space as " ". it needs to be deleted
+    
+    print(entry[-1])
+    if entry[-1] is " ":
+        print("you found it",entry[-1])
+        entry[-1]=None
+    """
+
     for character in entry:
-        if character is not None:
+        if character is not None and fromMorse is True:
             result += matching[character]
         else:
-            pass
+            result += matching[character] + " "
 
     if writeToFile is not None:
         newFile = open(writeToFile, 'w').write(result)
     else:
-        #print(result)
+        print(result)
         return result
 
 
@@ -93,10 +103,9 @@ if __name__ == '__main__':
     #morseTranslator(fileName="sample.txt")                #works sample.txt contains "sos"
     #morseTranslator("... --- ...",fromMorse=True)         #works
 
-    #morseTranslator(entry="hello everyone of you",writeToFile="control.txt")                    #works
-    #morseTranslator(fileName="sample.txt",writeToFile="control1.txt")                           #works
-    #morseTranslator(fileName="control1.txt",writeToFile="control2.txt",fromMorse=True)          #not working
-
+    #morseTranslator(entry="hello everyone of you",writeToFile="control.txt")             #works
+    #morseTranslator(fileName="sample.txt",writeToFile="control1.txt")                    #works
+    morseTranslator(fileName="control1.txt",writeToFile="control2.txt",fromMorse=True)    #works file contains "... --- ..."
 
 
 
