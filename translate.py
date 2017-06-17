@@ -1,6 +1,6 @@
 import sys
 
-def translateToMorse(entry=None,fileName=None,fromMorse=False):
+def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
     """
     Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
     either gets from file or as a entry. But, not at the same time.
@@ -50,7 +50,7 @@ def translateToMorse(entry=None,fileName=None,fromMorse=False):
 }
 
     # Checks if one of the parameters have entered
-    assert not (entry != None and fileName != None), "only one param please"
+    assert not (entry != None and fileName != None), "Entry and fileName can not be used together"
 
     #If fileName parameter is entered, it is going to read as an entry
     if fileName is not None:
@@ -70,9 +70,11 @@ def translateToMorse(entry=None,fileName=None,fromMorse=False):
         else:
             pass
 
-    #print(result)
-    return result
-
+    if writeToFile is not None:
+        newFile = open(writeToFile, 'w').write(result)
+    else:
+        #print(result)
+        return result
 
 
 if __name__ == '__main__':
@@ -81,14 +83,22 @@ if __name__ == '__main__':
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
 
+
     #There will be another parameter which is going to write result to a file.
 
     #################TESTING##################
 
-    #translateToMorse(fileName="sample.txt",fromMorse=True) #works sample.txt contains "... -- ..."
-    #translateToMorse(entry="mert")                         #works
-    #translateToMorse(fileName="sample.txt")                #works sample.txt contains "sos"
-    #translateToMorse("... --- ...",fromMorse=True)         #works
+    #morseTranslator(fileName="sample.txt",fromMorse=True) #works sample.txt contains "... -- ..."
+    #morseTranslator(entry="mert")                         #works
+    #morseTranslator(fileName="sample.txt")                #works sample.txt contains "sos"
+    #morseTranslator("... --- ...",fromMorse=True)         #works
+
+    #morseTranslator(entry="hello everyone of you",writeToFile="control.txt")                    #works
+    #morseTranslator(fileName="sample.txt",writeToFile="control1.txt")                           #works
+    #morseTranslator(fileName="control1.txt",writeToFile="control2.txt",fromMorse=True)          #not working
+
+
+
 
     """
        Will be used hopefully in GUI version
