@@ -1,7 +1,7 @@
 # pyMorse
 PyMorse is a Python library project that translates the Morse code into a Latin alphabet or vice versa. Currently thinking to add new features. Any idea would be appreciated.
 
-#Here is what function provides;
+# Here is what function provides;
 
 Translates entries to Morse Code or vice versa;
 
