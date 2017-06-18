@@ -1,4 +1,7 @@
 import sys
+import os
+import time
+
 
 def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None):
     """
@@ -73,6 +76,27 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
         else:
             result += matching[character] + " "
 
+    if (fromMorse==False):
+        message=result
+    else:
+        message=""
+        for i in entry:
+            for j in i:
+                message+=j
+    
+    #if os.name() == "linux" or "linux2":
+        #beep function will be in here (linux)
+    #elif os.name() == "darwin":
+        #beep function will be in here (Mac)
+    if os.name == "win32" or os.name == "nt":
+        import winsound
+        print(message)
+        for i in message:
+            if i == ".":
+                winsound.Beep(1160,150)
+            elif i == "-":
+                winsound.Beep(1200,400)
+
     #writes result to specified file if entered
     if writeToFile is not None:
         newFile = open(writeToFile, 'w').write(result)
@@ -83,6 +107,7 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
 
 if __name__ == '__main__':
     get_input = input
+    morseTranslator(entry="... --- ...",fromMorse=True)
 
     #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
