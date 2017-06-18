@@ -47,6 +47,7 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
         '8': '---..',           '(': '-.--.-',
         '9': '----.',           ')': '-.--.-',
         ' ': ' ',               '_': '..--.-',
+        '':''
 }
 
     # Checks if one of the parameters have entered
@@ -75,7 +76,7 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
     """
 
     for character in entry:
-        if character is not None and fromMorse is True:
+        if character!='' and fromMorse is True:
             result += matching[character]
         else:
             result += matching[character] + " "
