@@ -1,4 +1,4 @@
-def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None):
+def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None,playSound=False):
     """
     Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
     either gets from file or as a entry.
@@ -49,8 +49,9 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
         '':''
 }
 
-    # Checks if one of the parameters have entered
+    # Checks if parameters have entered properly
     assert not (entry != None and fromFile != None), "Entry and fileName can not be used together"
+    assert not (fromMorse == True and playSound == True), "Only Morse code can be voiced"
 
     #If fileName parameter is entered, it is going to read as an entry
     if fromFile is not None:
@@ -74,47 +75,39 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
     #writes result to specified file if entered
     if writeToFile is not None:
         newFile = open(writeToFile, 'w').write(result)
-    else:
-        #pygame.mixer.pre_init(22050,16,2,4096)
 
-        import pygame
-
+    #plays result as sound if fromMorse is False
+    if playSound is True:
+        import pygame, time
 
         pygame.init()
         pygame.mixer.get_init()
-        #os.getcwd()
 
-        dotSound = pygame.mixer.Sound('dotSound.mp3')
-        dashSound = pygame.mixer.Sound('dashSound.mp3')
+        dotSound = pygame.mixer.Sound('dotSound.wav')
+        dashSound = pygame.mixer.Sound('dashSound.wav')
 
         for character in result:
+
             if character is ".":
                 pygame.mixer.Sound.play(dotSound)
-                #dotSound.play()
-                time.sleep(1)
-                #dotSound.stop()
+                time.sleep(0.3)
+
             if character is "-":
                 pygame.mixer.Sound.play(dashSound)
-                #dashSound.play()
-                time.sleep(1)
-                #dashSound.stop()
-        print(result)
-        return result
+                time.sleep(0.3)
+
+            if character is " ":
+                time.sleep(0.3)
+
+    #print(result)
+    return result
 
 
 if __name__ == '__main__':
     import sys
-    import pygame, time, os
-    from pygame.locals import *
 
     get_input = input
 
     #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
-
-    morseTranslator(entry="sos")
-
-
-
-

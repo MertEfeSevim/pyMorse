@@ -26,3 +26,12 @@ Writes to specified file;
     
     morseTranslator(entry="... --- ...",writeToFile="greatDocumentation.txt")
     #writes "sos" to greatDocumentation.txt
+
+Plays Morse Code;
+    
+    morseTranslator(entry="sos",playSound=True)
+    #Returns tranlation and plays the translated code
+    
+    morseTranslator(entry="... --- ...",playSound=True,fromMorse=True)
+    #Returns error, can not play latin alphabet
+        

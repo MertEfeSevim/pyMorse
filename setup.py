@@ -15,5 +15,5 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Text Processing :: Linguistic",
-        ]
+        ], requires=['pygame']
 )
