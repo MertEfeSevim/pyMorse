@@ -1,8 +1,3 @@
-import sys
-import os
-import time
-
-
 def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None):
     """
     Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
@@ -76,45 +71,50 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
         else:
             result += matching[character] + " "
 
-    if (fromMorse==False):
-        message=result
-    else:
-        message=""
-        for i in entry:
-            for j in i:
-                message+=j
-
-    #if os.name() == "linux" or "linux2":
-        #beep function will be in here (linux)
-    if os.name == "darwin":
-        import Carbon.Snd #beep function will be in here (Mac)
-        for i in message:
-            if i == ".":
-                Carbon.Snd.SysBeep(0.15)
-            elif i == "-":
-                Carbon.Snd.SysBeep(0.4)
-
-    elif os.name == "win32" or os.name == "nt":
-        import winsound
-        print(message)
-        for i in message:
-            if i == ".":
-                winsound.Beep(1160,150)
-            elif i == "-":
-                winsound.Beep(1200,400)
-
     #writes result to specified file if entered
     if writeToFile is not None:
         newFile = open(writeToFile, 'w').write(result)
     else:
+        #pygame.mixer.pre_init(22050,16,2,4096)
+
+        import pygame
+
+
+        pygame.init()
+        pygame.mixer.get_init()
+        #os.getcwd()
+
+        dotSound = pygame.mixer.Sound('dotSound.mp3')
+        dashSound = pygame.mixer.Sound('dashSound.mp3')
+
+        for character in result:
+            if character is ".":
+                pygame.mixer.Sound.play(dotSound)
+                #dotSound.play()
+                time.sleep(1)
+                #dotSound.stop()
+            if character is "-":
+                pygame.mixer.Sound.play(dashSound)
+                #dashSound.play()
+                time.sleep(1)
+                #dashSound.stop()
         print(result)
         return result
 
 
 if __name__ == '__main__':
+    import sys
+    import pygame, time, os
+    from pygame.locals import *
+
     get_input = input
-    morseTranslator(entry="... --- ...",fromMorse=True)
 
     #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
+
+    morseTranslator(entry="sos")
+
+
+
+
