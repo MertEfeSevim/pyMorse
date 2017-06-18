@@ -91,6 +91,15 @@ def translateFromMorse(*entry):
     print(result)
     return result
 
+def main():
+    while True:
+        inp=int(input("what do you want to do?\n    "
+              "1. read morse code from file\n   "
+              "2. take morse text input from here\n "
+              "3. take normal text input from here\n "
+              "4. read normal text from file\n"))
+        if inp==1:
+            
 
 if __name__ == '__main__':
     translateToMorse("asd")
