@@ -70,7 +70,6 @@ def translateToMorse(*entry):
             raise IOError("entry is empty")
         else:
             result.append(matching[character.upper()])
-            #not working
     print(result)
     return result
 
@@ -79,7 +78,7 @@ def translateFromMorse(*entry):
         entry = str(input('Entry: '))
     else:                               #else use input parameter
         entry = entry[0]
-
+    ##inversed_dict=
     result = ""
 
     for character in entry:
@@ -91,16 +90,36 @@ def translateFromMorse(*entry):
     print(result)
     return result
 
-def main():
-    while True:
+def inputmenu():
+    try:
         inp=int(input("what do you want to do?\n    "
               "1. read morse code from file\n   "
               "2. take morse text input from here\n "
               "3. take normal text input from here\n "
               "4. read normal text from file\n"))
         if inp==1:
-            
+            temp = translateFromMorse(readMorse())
+            val = str(input("Do you want to write into file?[Y/N]"))
+            if val == "Y":
+                writeNormal(temp)
+        elif inp==2:
+            temp = translateFromMorse()
+            val = str(input("Do you want to write into file?[Y/N]"))
+            if val == "Y":
+                writeNormal(temp)
+        elif inp==3:
+            temp = translateToMorse()
+            val = str(input("Do you want to write into file?[Y/N]"))
+            if val == "Y":
+                writeMorse(temp)
+        elif inp==4:
+            translateToMorse(readNormal())
+            val = str(input("Do you want to write into file?[Y/N]"))
+            if val == "Y":
+                writeMorse(temp)
 
+    except KeyboardInterrupt:
+        exit()
 if __name__ == '__main__':
     translateToMorse("asd")
     #translateFromMorse()
