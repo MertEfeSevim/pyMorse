@@ -1,12 +1,13 @@
 import sys
 
-def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
+def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None):
     """
     Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
-    either gets from file or as a entry. But, not at the same time.
+    either gets from file or as a entry.
     :param entry: 
-    :param fileName:
+    :param fromFile:
     :param fromMorse:
+    :param writeToFile:
     :return: 
     """
     matching = {
@@ -51,11 +52,11 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
 }
 
     # Checks if one of the parameters have entered
-    assert not (entry != None and fileName != None), "Entry and fileName can not be used together"
+    assert not (entry != None and fromFile != None), "Entry and fileName can not be used together"
 
     #If fileName parameter is entered, it is going to read as an entry
-    if fileName is not None:
-        entry = open(fileName,'r').read()
+    if fromFile is not None:
+        entry = open(fromFile, 'r').read()
 
     #If translation will be going to occur from Morse code to alphabet
     if fromMorse is True:
@@ -66,21 +67,13 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
     #changes the characters and adds to result
     result = ""
 
-    """
-    In control1.txt "... --- ... " contained and entry gets last space as " ". it needs to be deleted
-    
-    print(entry[-1])
-    if entry[-1] is " ":
-        print("you found it",entry[-1])
-        entry[-1]=None
-    """
-
     for character in entry:
         if character!='' and fromMorse is True:
             result += matching[character]
         else:
             result += matching[character] + " "
 
+    #writes result to specified file if entered
     if writeToFile is not None:
         newFile = open(writeToFile, 'w').write(result)
     else:
@@ -91,30 +84,6 @@ def morseTranslator(entry=None,fileName=None,fromMorse=False, writeToFile=None):
 if __name__ == '__main__':
     get_input = input
 
+    #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
-
-
-    #There will be another parameter which is going to write result to a file.
-
-    #################TESTING##################
-
-    #morseTranslator(fileName="sample.txt",fromMorse=True) #works sample.txt contains "... -- ..."
-    #morseTranslator(entry="mert")                         #works
-    #morseTranslator(fileName="sample.txt")                #works sample.txt contains "sos"
-    #morseTranslator("... --- ...",fromMorse=True)         #works
-
-    #morseTranslator(entry="hello everyone of you",writeToFile="control.txt")             #works
-    #morseTranslator(fileName="sample.txt",writeToFile="control1.txt")                    #works
-    morseTranslator(fileName="control1.txt",writeToFile="control2.txt",fromMorse=True)    #works file contains "... --- ..."
-
-
-
-    """
-       Will be used hopefully in GUI version
-
-       if entry is None:
-           entry=int(get_input("Entry: "))
-       else:
-           entry=entry[0]
-    """
