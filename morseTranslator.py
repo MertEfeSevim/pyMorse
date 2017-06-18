@@ -83,12 +83,18 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
         for i in entry:
             for j in i:
                 message+=j
-    
+
     #if os.name() == "linux" or "linux2":
         #beep function will be in here (linux)
-    #elif os.name() == "darwin":
-        #beep function will be in here (Mac)
-    if os.name == "win32" or os.name == "nt":
+    if os.name == "darwin":
+        import Carbon.Snd #beep function will be in here (Mac)
+        for i in message:
+            if i == ".":
+                Carbon.Snd.SysBeep(0.15)
+            elif i == "-":
+                Carbon.Snd.SysBeep(0.4)
+
+    elif os.name == "win32" or os.name == "nt":
         import winsound
         print(message)
         for i in message:
