@@ -19,6 +19,9 @@ setup(
     author='Mert Efe Sevim',
     author_email='mertefesevim@gmail.com',
     description='pyMorse is a Python library project that translates the Morse Code into an Latin alphabet or vice versa.',
+    packages=[""],
+    package_data={'': ['*.wav']},
+    include_package_data=True,
     classifiers = [
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
