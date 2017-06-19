@@ -1,13 +1,18 @@
-def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None,playSound=False):
+def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None, playSound=False):
+
     """
-    Takes one of the parameters(entry or fileName) and converts to Morse code or vice versa,
-    either gets from file or as a entry.
+    Takes one of the parameters(entry or fileName) 
+    and converts to Morse code or vice versa,
+    also able to play sounds of translations.
+    
     :param entry: 
     :param fromFile:
     :param fromMorse:
     :param writeToFile:
+    :param playSound:
     :return: 
     """
+
     matching = {
         'A': '.-',              'a': '.-',
         'B': '-...',            'b': '-...',
@@ -54,50 +59,56 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
     assert not (fromMorse == True and playSound == True), "Only Morse code can be voiced"
 
     #If fileName parameter is entered, it is going to read as an entry
-    if fromFile is not None:
-        entry = open(fromFile, 'r').read()
+    if fromFile is not None: entry = open(fromFile, 'r').read()
 
     #If translation will be going to occur from Morse code to alphabet
     if fromMorse is True:
-        entry=entry.split(" ")
+
+        entry = entry.split(" ")
         reversedMatching = {v: k for k, v in matching.items()}
-        matching=reversedMatching
+        matching = reversedMatching
 
     #changes the characters and adds to result
     result = ""
 
     for character in entry:
+
         if character!='' and fromMorse is True:
             result += matching[character]
         else:
             result += matching[character] + " "
 
     #writes result to specified file if entered
-    if writeToFile is not None:
-        newFile = open(writeToFile, 'w').write(result)
+    if writeToFile is not None: newFile = open(writeToFile, 'w').write(result)
 
     #plays result as sound if fromMorse is False
     if playSound is True:
-        import pygame, time
 
-        pygame.init()
-        pygame.mixer.get_init()
+        try :
+            import pygame, time
 
-        dotSound = pygame.mixer.Sound('dotSound.wav')
-        dashSound = pygame.mixer.Sound('dashSound.wav')
+        except ImportError:
+            raise ImportError("You need to import pygame to use this feature")
 
-        for character in result:
+        else:
+            pygame.init()
+            pygame.mixer.get_init()
 
-            if character is ".":
-                pygame.mixer.Sound.play(dotSound)
-                time.sleep(0.3)
+            dotSound = pygame.mixer.Sound('dotSound.wav')
+            dashSound = pygame.mixer.Sound('dashSound.wav')
 
-            if character is "-":
-                pygame.mixer.Sound.play(dashSound)
-                time.sleep(0.3)
+            for character in result:
 
-            if character is " ":
-                time.sleep(0.3)
+                if character is ".":
+                    pygame.mixer.Sound.play(dotSound)
+                    time.sleep(0.3)
+
+                if character is "-":
+                    pygame.mixer.Sound.play(dashSound)
+                    time.sleep(0.3)
+
+                if character is " ":
+                    time.sleep(0.3)
 
     #print(result)
     return result

@@ -1,6 +1,12 @@
 # pyMorse
 PyMorse is a Python library project that translates the Morse code into a Latin alphabet or vice versa. Currently thinking to add new features. Any idea would be appreciated.
 
+# Dependency
+PyGame is needed to play translations if asked for.
+
+# Installation
+    git clone https://github.com/MertEfeSevim/pyMorse.git
+
 # Here is what function provides;
 
 Translates entries to Morse Code or vice versa;
@@ -27,11 +33,11 @@ Writes to specified file;
     morseTranslator(entry="... --- ...",writeToFile="greatDocumentation.txt")
     #writes "sos" to greatDocumentation.txt
 
-Plays Morse Code;
+Plays Morse Code's sound;
     
     morseTranslator(entry="sos",playSound=True)
-    #Returns tranlation and plays the translated code
+    #Returns translation and plays the translated code
     
     morseTranslator(entry="... --- ...",playSound=True,fromMorse=True)
     #Returns error, can not play latin alphabet
-        
+
