@@ -111,13 +111,12 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
 
     return result
 
-
 if __name__ == '__main__':
     # !/usr/bin/env python
     import sys
 
     get_input = input
 
-    #If python2 is used, func still can work
+    # If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
