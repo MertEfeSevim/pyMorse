@@ -88,7 +88,7 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
             import pygame, time
 
         except ImportError:
-            raise ImportError("You need to import pygame to use this feature")
+            raise ImportError("You need to import PyGame to use this feature")
 
         else:
             pygame.init()
