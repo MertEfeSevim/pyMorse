@@ -109,18 +109,15 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
                 if character is " ":
                     time.sleep(0.2)
 
-    #print(result)
     return result
 
 
 if __name__ == '__main__':
+    # !/usr/bin/env python
     import sys
 
-    morseTranslator(entry="sos", playSound=True)
     get_input = input
 
     #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
-
-    morseTranslator(entry="sos", playSound=True)
