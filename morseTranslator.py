@@ -100,15 +100,15 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
             for character in result:
 
                 if character is ".":
-                    pygame.mixer.Sound.play(dotSound)
-                    time.sleep(0.3)
+                    dotSound.play()
+                    time.sleep(0.2)
 
                 if character is "-":
-                    pygame.mixer.Sound.play(dashSound)
-                    time.sleep(0.3)
+                    dashSound.play()
+                    time.sleep(0.2)
 
                 if character is " ":
-                    time.sleep(0.3)
+                    time.sleep(0.2)
 
     #print(result)
     return result
