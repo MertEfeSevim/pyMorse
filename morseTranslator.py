@@ -92,7 +92,7 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
 
         else:
             pygame.init()
-            pygame.mixer.get_init()
+            pygame.mixer.init()
 
             dotSound = pygame.mixer.Sound('dotSound.wav')
             dashSound = pygame.mixer.Sound('dashSound.wav')
@@ -122,3 +122,5 @@ if __name__ == '__main__':
     #If python2 is used, func still can work
     if sys.version_info[:2] <= (2, 7):
         get_input = raw_input
+
+    morseTranslator(entry="sos", playSound=True)
