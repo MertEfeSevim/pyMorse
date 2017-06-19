@@ -91,7 +91,6 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
             raise ImportError("You need to import PyGame to use this feature")
 
         else:
-            pygame.init()
             pygame.mixer.init()
 
             dotSound = pygame.mixer.Sound('dotSound.wav')
@@ -117,6 +116,7 @@ def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None
 if __name__ == '__main__':
     import sys
 
+    morseTranslator(entry="sos", playSound=True)
     get_input = input
 
     #If python2 is used, func still can work
