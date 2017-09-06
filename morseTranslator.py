@@ -1,7 +1,5 @@
 class pyMorse(object):
-    def morseTranslator(entry=None, fromFile=None, fromMorse=False,
-    writeToFile=None, playSound=False):
-
+    def morseTranslator(entry=None, fromFile=None, fromMorse=False, writeToFile=None, playSound=False):
         """
         Takes one of the parameters(entry or fileName)
         and converts to Morse code or vice versa,
@@ -53,15 +51,18 @@ class pyMorse(object):
             '8': '---..',           '(': '-.--.-',
             '9': '----.',           ')': '-.--.-',
             ' ': ' ',               '_': '..--.-',
-            '':''
-                    }
+            '': ''
+        }
 
         # Checks if parameters have entered properly
-        assert not (entry != None and fromFile != None), "Entry and fileName can not be used together"
-        assert not (fromMorse == True and playSound == True), "Only Morse code can be voiced"
+        assert not (entry != None and fromFile !=
+                    None), "Entry and fileName can not be used together"
+        assert not (fromMorse == True and playSound ==
+                    True), "Only Morse code can be voiced"
 
         # If fileName parameter is entered, it is going to read as an entry
-        if fromFile is not None: entry = open(fromFile, 'r').read()
+        if fromFile is not None:
+            entry = open(fromFile, 'r').read()
 
         # If translation will be going to occur from Morse code to alphabet
         if fromMorse is True:
@@ -81,7 +82,8 @@ class pyMorse(object):
                 result += matching[character] + " "
 
         # writes result to specified file if entered
-        if writeToFile is not None: newFile = open(writeToFile, 'w').write(result)
+        if writeToFile is not None:
+            newFile = open(writeToFile, 'w').write(result)
 
         # plays result as sound if fromMorse is False
         if playSound is True:
